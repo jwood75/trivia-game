@@ -18,14 +18,14 @@
 	var correctAnswer = ["Zeus", "Earthquakes", "Persephone", "Metis", "Daphne", "Males", "Aphrodite", "The Caduceus", "Peacock", "The Sirens", "Aphrodite", "Dionysus", "Dog",
 						"Hestia", "Persephone", "Magic"];
 
-	var imageArray = ["<img class='center-block img-right' src='assets/images/zeus.gif'>", "<img class='center-block img-right' src='assets/images/poseidon.gif'>", 
-						"<img class='center-block img-right' src='assets/images/persephone2.gif'>", "<img class='center-block img-right' src='assets/images/athena.gif'>", 
-						"<img class='center-block img-right' src='assets/images/daphne.gif'>", "<img class='center-block img-right' src='assets/images/artemis.gif'>", 
-						"<img class='center-block img-right' src='assets/images/aphrodite.gif'>", "<img class='center-block img-right' src='assets/images/hermes.gif'>",
-						"<img class='center-block img-right' src='assets/images/hera.gif'>", "<img class='center-block img-right' src='assets/images/sirens.gif'>",
-						"<img class='center-block img-right' src='assets/images/aphrodite2.gif'>", "<img class='center-block img-right' src='assets/images/dionysus.gif'>",
-						"<img class='center-block img-right' src='assets/images/scoobydoo.gif'>", "<img class='center-block img-right' src='assets/images/dionysus2.gif'>",
-						"<img class='center-block img-right' src='assets/images/persephone.gif'>", "<img class='center-block img-right' src='assets/images/hecate.gif'>"];
+	var imageArray = ["<img class='center-block gifQ' src='assets/images/zeus.gif'>", "<img class='center-block gifQ' src='assets/images/poseidon.gif'>", 
+						"<img class='center-block gifQ' src='assets/images/persephone2.gif'>", "<img class='center-block gifQ' src='assets/images/athena.gif'>", 
+						"<img class='center-block gifQ' src='assets/images/daphne.gif'>", "<img class='center-block gifQ' src='assets/images/artemis.gif'>", 
+						"<img class='center-block gifQ' src='assets/images/aphrodite.gif'>", "<img class='center-block gifQ' src='assets/images/hermes.gif'>",
+						"<img class='center-block gifQ' src='assets/images/hera.gif'>", "<img class='center-block gifQ' src='assets/images/sirens.gif'>",
+						"<img class='center-block gifQ' src='assets/images/aphrodite2.gif'>", "<img class='center-block gifQ' src='assets/images/dionysus.gif'>",
+						"<img class='center-block gifQ' src='assets/images/scoobydoo.gif'>", "<img class='center-block gifQ' src='assets/images/dionysus2.gif'>",
+						"<img class='center-block gifQ' src='assets/images/persephone.gif'>", "<img class='center-block gifQ' src='assets/images/hecate.gif'>"];
 
 	var questionIndex = 0;
 	var correct = 0;
@@ -44,6 +44,7 @@ $(document).ready(function(){
 
 			generate();
 			finalCountdown();
+			$("#resetBtn").hide();
 		}
 
 		start();
@@ -51,6 +52,8 @@ $(document).ready(function(){
 	//creating on click functions================================
 		
 		$(".option").on("click", function() {
+
+			$(".option").hide();
 
 			userAnswer = $(this).text();
 
@@ -107,6 +110,7 @@ function timesUp() {
 
 	unanswered++;
 	$("#triviaQ").html("<p class='winLoseScreen'>Time's Up! The answer is: " + correctAnswer[questionIndex] + "</p>" + "<img class='center-block times-up-hades' src='assets/images/hades.gif'>");
+	$(".option").hide();
 	setTimeout(nextQuestion, 4000);
 }
 
@@ -118,6 +122,7 @@ function nextQuestion() {
 		generate();
 		countdown = 20;
 		finalCountdown();
+		$(".option").show();
 	}
 
 	else {
@@ -146,8 +151,8 @@ function finalCountdown() {
 
 function endGame() {
 
-	$("#triviaQ").html("<p class='gameOver'>Your Final Score! Correctly Answered: " + correct + ", Incorrectly Answered: " + incorrect + ", Unanswered: " + unanswered + "</p>");
-	$(".option").hide();
+	$("#triviaQ").html("<p class='gameOver'>Your Final Score!</p> <div><p class='gameOver'>Correctly Answered: " + correct + "</p></div><div><p class='gameOver'>Incorrectly Answered: " + incorrect + "</p></div><div><p class='gameOver'>Unanswered: " + unanswered + "</p></div>");
+	$("#resetBtn").show();
 }
 
 function resetTrivia() {
@@ -159,4 +164,6 @@ function resetTrivia() {
 	countdown = 20;
 	generate();
 	finalCountdown();
+	$(".option").show();
+	$("#resetBtn").hide();
 }
